@@ -1,23 +1,34 @@
-alert("Churrasco");
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelector("#churrascoForm").addEventListener("submit", (evt) => {
+        evt.preventDefault();
 
-let adultosComAlcool = parseFloat(prompt("Adultos que consomem bebidas alcoólicas"));
-let adultosSemAlcool = parseFloat(prompt("Adultos que não consomem bebidas alcoólicas"));
-let criancas = parseFloat(prompt("Crianças"));
+        const adultosComAlcool = parseFloat(document.getElementById("inputAdultosComAlcool").value);
+        const adultosSemAlcool = parseFloat(document.getElementById("inputAdultosSemAlcool").value);
+        const criancas = parseFloat(document.getElementById("inputCriancas").value);
 
-let adultos = adultosComAlcool + adultosSemAlcool;
-let pessoas = adultos + criancas;
+        const adultos = adultosComAlcool + adultosSemAlcool;
+        const pessoas = adultos + criancas;
+        
+        const carne = (0.4 * adultos + 0.2 * criancas).toFixed(2);
+        const acompanhamentos = (0.2 * pessoas).toFixed(2);
+        const cerveja = (2 * adultosComAlcool).toFixed(2);
+        const refrigerante = (0.5 * (adultosSemAlcool + criancas)).toFixed(2);
+        const agua = (0.4 * pessoas).toFixed(2);
 
-let carne = 0.4 * adultos + 0.2 * criancas;
-alert("Carne: " + carne.toFixed(1));
+        document.getElementById("ResultadoAdultos").textContent = `Adultos: ${adultos}`;
+        document.getElementById("ResultadoPessoas").textContent = `Pessoas: ${pessoas}`;
+        document.getElementById("ResultadoCarne").textContent = `Carne: ${carne} kg`;
+        document.getElementById("ResultadoAcompanhamentos").textContent = `Acompanhamentos: ${acompanhamentos} kg`;
+        document.getElementById("ResultadoCerveja").textContent = `Cerveja: ${cerveja} litros`;
+        document.getElementById("ResultadoRefrigerante").textContent = `Refrigerante: ${refrigerante} litros`;
+        document.getElementById("ResultadoAgua").textContent = `Água: ${agua} litros`;
 
-let acompanhamentos = 0.2 * pessoas;
-alert("Acompanhamentos: " + acompanhamentos.toFixed(1));
+        document.getElementById("bloco1").classList.add("esconder");
+        document.getElementById("bloco2").classList.remove("esconder");
 
-let cerveja = 2 * adultosComAlcool;
-alert("Cerveja: " + cerveja.toFixed(1));
+    });
 
-let refrigerante = 0.5 * (adultosSemAlcool + criancas);
-alert("Refrigerante: " + refrigerante.toFixed(1));
-
-let agua = 0.4 * pessoas;
-alert("Água: " + agua.toFixed(1));
+    document.querySelector("#recarregarButton").addEventListener("click", () => {
+        location.reload();
+    });
+});
